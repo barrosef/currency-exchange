@@ -10,18 +10,18 @@ repositories {
 
 dependencies {
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
-    implementation 'io.quarkus:quarkus-hibernate-reactive-panache:2.7.2.Final'
-    implementation 'io.quarkus:quarkus-smallrye-openapi:2.7.2.Final'
-    implementation 'io.quarkus:quarkus-resteasy-reactive:2.7.2.Final'
-    implementation 'io.quarkus:quarkus-resteasy-reactive-jackson:2.7.2.Final'
-    implementation 'io.quarkus:quarkus-rest-client-reactive:2.7.2.Final'
-    implementation 'io.quarkus:quarkus-rest-client-reactive-jackson:2.7.2.Final'
-    implementation 'io.quarkus:quarkus-jdbc-derby:2.7.2.Final'
+    implementation 'io.quarkus:quarkus-hibernate-reactive-panache'
+    implementation 'io.quarkus:quarkus-smallrye-openapi'
+    implementation 'io.quarkus:quarkus-resteasy-reactive'
+    implementation 'io.quarkus:quarkus-resteasy-reactive-jackson'
+    implementation 'io.quarkus:quarkus-rest-client-reactive'
+    implementation 'io.quarkus:quarkus-rest-client-reactive-jackson'
+    implementation 'io.quarkus:quarkus-jdbc-derby'
     implementation 'io.quarkus:quarkus-jdbc-derby-deployment:2.7.2.Final'
-    implementation 'io.quarkus:quarkus-arc:2.7.2.Final'
-    implementation 'io.quarkus:quarkus-agroal:2.7.2.Final'
-    testImplementation 'io.quarkus:quarkus-junit5:2.7.2.Final'
-    testImplementation 'io.rest-assured:rest-assured:2.7.2.Final'
+    implementation 'io.quarkus:quarkus-arc'
+    implementation 'io.quarkus:quarkus-agroal'
+    testImplementation 'io.quarkus:quarkus-junit5'
+    testImplementation 'io.rest-assured:rest-assured'
 }
 
 group 'org.acme'
