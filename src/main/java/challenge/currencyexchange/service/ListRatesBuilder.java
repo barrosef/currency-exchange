@@ -2,17 +2,23 @@ package challenge.currencyexchange.service;
 
 import challenge.currencyexchange.domain.User;
 import challenge.currencyexchange.resources.ExchangeRateResponse;
+import challenge.currencyexchange.util.ExchangeRateConfig;
 
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
+@RequestScoped
 public class ListRatesBuilder {
-    
+
+    @Inject
+    ExchangeRateConfig config;
+
     private boolean isRootUser;
     private String login;
 
     public ListRatesBuilder validate(User rooUser, String login) {
-        //TODO validate
         return this;
     }
 
