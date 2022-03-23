@@ -1,5 +1,7 @@
 package challenge.currencyexchange.domain;
 
+import lombok.*;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -12,6 +14,11 @@ import java.util.Map;
 @NamedQueries({
         @NamedQuery(name = "Rate.findByUser", query = "select r from Rate r where r.user = :user")
 })
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Rate {
 
     @Id
