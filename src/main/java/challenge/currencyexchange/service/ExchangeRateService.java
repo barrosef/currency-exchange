@@ -23,21 +23,28 @@ public class ExchangeRateService {
 
     private ExchangeRateConfig config;
 
+    private ExchangeRateBuilder builder;
+
     @RestClient
     private ExchangeRatesClient exchangeRatesClient;
 
     private User rootUser;
 
     @Inject
-    public ExchangeRateService(UserRepository userRepository, RateRepository rateRepository, ExchangeRateConfig config) {
+    public ExchangeRateService(UserRepository userRepository, RateRepository rateRepository, ExchangeRateConfig config,
+                               ExchangeRateBuilder builder) {
         this.userRepository = userRepository;
         this.rateRepository = rateRepository;
         this.config = config;
+        this.builder = builder;
         this.init();
     }
 
     public ExchangeRateResponse rate(ExchangeRateRequest exchangeRateRequest) {
-        return null;
+        return builder.validate(rootUser, exchangeRateRequest)
+                .exchange(exchangeRateRequest, exchangeRatesClient)
+                .createRate(this)
+                .build();
     }
 
     private void init() {
