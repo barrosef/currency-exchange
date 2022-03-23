@@ -12,6 +12,7 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.util.List;
 
 @Startup
 @ApplicationScoped
@@ -23,7 +24,8 @@ public class ExchangeRateService {
 
     private ExchangeRateConfig config;
 
-    private ExchangeRateBuilder builder;
+    private ExchangeRateBuilder rateBuilder;
+    private ListRatesBuilder listBuilder;
 
     @RestClient
     private ExchangeRatesClient exchangeRatesClient;
@@ -32,16 +34,17 @@ public class ExchangeRateService {
 
     @Inject
     public ExchangeRateService(UserRepository userRepository, RateRepository rateRepository, ExchangeRateConfig config,
-                               ExchangeRateBuilder builder) {
+                               ExchangeRateBuilder builder, ListRatesBuilder listBuilder) {
         this.userRepository = userRepository;
         this.rateRepository = rateRepository;
         this.config = config;
-        this.builder = builder;
+        this.rateBuilder = builder;
+        this.listBuilder = listBuilder;
         this.init();
     }
 
     public ExchangeRateResponse rate(ExchangeRateRequest exchangeRateRequest) {
-        return builder.validate(rootUser, exchangeRateRequest)
+        return rateBuilder.validate(rootUser, exchangeRateRequest)
                 .exchange(exchangeRateRequest, exchangeRatesClient)
                 .createRate(this)
                 .build();
@@ -55,5 +58,12 @@ public class ExchangeRateService {
         this.rootUser = this.userRepository.findByLogin(config.rootUserLogin())
                 .orElseThrow(() ->
                         new RuntimeException("Could not instantiate application, no root user configuration found"));
+    }
+
+    public List<ExchangeRateResponse> list(String userLogin) {
+        return  listBuilder
+                    .validate(rootUser, userLogin)
+                    .listRates()
+                    .build();
     }
 }
