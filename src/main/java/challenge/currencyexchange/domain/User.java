@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user_cextb00")
 @NamedQueries({
-        @NamedQuery(name = "findByLogin", query = "select u from User u where u.login = :login")
+        @NamedQuery(name = "User.findByLogin", query = "select u from User u where u.login = :login")
 })
 public class User {
 

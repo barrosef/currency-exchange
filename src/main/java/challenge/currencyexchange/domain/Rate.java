@@ -10,7 +10,7 @@ import java.util.Map;
 @Entity
 @Table(name = "rate_cextb01")
 @NamedQueries({
-        @NamedQuery(name = "findByUser", query = "select r from Rate r where r.user = :user")
+        @NamedQuery(name = "Rate.findByUser", query = "select r from Rate r where r.user = :user")
 })
 public class Rate {
 
