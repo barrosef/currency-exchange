@@ -4,12 +4,15 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "user_cextb00")
+@NamedQueries({
+        @NamedQuery(name = "User.findByLogin", query = "select u from User u where u.login = :login")
+})
 public class User {
 
     @Id
     @GeneratedValue
     @Column(name = "user_id")
-    private Integer userId;
+    private Long userId;
 
     @Column(name = "login")
     private String login;

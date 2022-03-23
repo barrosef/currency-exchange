@@ -9,18 +9,17 @@ repositories {
 }
 
 dependencies {
+    implementation 'io.quarkus:quarkus-rest-client-reactive-jackson'
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
     implementation 'io.quarkus:quarkus-hibernate-orm-panache'
     implementation 'io.quarkus:quarkus-smallrye-openapi'
-    implementation 'io.quarkus:quarkus-resteasy-reactive'
     implementation 'io.quarkus:quarkus-resteasy-reactive-jackson'
-    implementation 'io.quarkus:quarkus-rest-client-reactive'
-    implementation 'io.quarkus:quarkus-rest-client-reactive-jackson'
     implementation 'io.quarkus:quarkus-jdbc-h2-runtime:0.12.0'
     implementation 'io.quarkus:quarkus-jdbc-h2-deployment:2.7.3.Final'
     implementation 'io.quarkus:quarkus-arc'
     implementation 'io.quarkus:quarkus-flyway'
     implementation 'io.quarkus:quarkus-agroal'
+    implementation 'io.quarkus:quarkus-hibernate-validator'
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
 }
