@@ -38,7 +38,7 @@ public class Rate {
             joinColumns = {@JoinColumn(name = "rate_detail_id", referencedColumnName = "rate_id")})
     @MapKeyColumn(name = "currency_name")
     @Column(name = "currency_value")
-    private Map<String, Double> rates = new LinkedHashMap<>();
+    private Map<String, Double> rateDetails = new LinkedHashMap<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "fk_user"))
