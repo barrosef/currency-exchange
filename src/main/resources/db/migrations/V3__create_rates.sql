@@ -4,7 +4,7 @@ create table rate_cextb01 (
                               base_value double,
                               conversion_rate double,
                               dateTime timestamp,
-                              user_id integer,
+                              user_id bigint,
                               primary key (rate_id)
 );
 
