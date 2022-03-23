@@ -11,6 +11,7 @@ import java.util.List;
 @Path(ExchangeRatesClient.REST_SERVER_PATH)
 @RegisterRestClient
 public interface ExchangeRatesClient {
+
     String REST_SERVER_PATH = "/latest";
     String ACCESS_KEY_PARAM = "access_key";
     String BASE_PARAM = "base";
