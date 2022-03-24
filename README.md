@@ -31,6 +31,13 @@ Networking
 ### Acesse a documentação da API
 Clique [aqui](http://localhost:8080/swagger-ui) ou cole este link no browser de sua preferência http://localhost:8080/swagger-ui
 
+### Endpoint público
+Este é o [link](https://chlcurrencyexchange.herokuapp.com/) para acesso público à api, porém ainda estamos superando um
+problema entre o heroky e quarkus
+A problem occurred configuring root project 'currency-exchange'.
+> Could not resolve all files for configuration ':classpath'.
+> Could not resolve io.quarkus:gradle-application-plugin:2.7.2.Final.
+Required by:
 ### Acesso aos endpoints
 É necessário informar no header o parâmetro *user_login* e considerar que a api, inicialmente, realiza a carga de dois usuários:
 1. root - usuário pode realizar leitura sem restrições porém sem permissão para realização de conversões de moedas.
