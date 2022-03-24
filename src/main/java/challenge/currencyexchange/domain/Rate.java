@@ -39,11 +39,11 @@ public class Rate {
     @NotNull(message = "The conversion rate is required")
     private Double conversionTax;
 
-    @Column
+    @Column(name = "date_time")
     @NotNull(message = "Date time reate is required")
     private LocalDateTime dateTime;
 
-    @Column(name = "target")
+    @Column(name = "symbol_to_convert")
     @NotNull(message = "The currency to convert is required")
     @Size(min = 3, max = 3)
     private String symbolToConvert;
