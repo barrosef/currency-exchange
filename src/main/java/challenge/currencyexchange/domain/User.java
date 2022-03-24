@@ -1,5 +1,10 @@
 package challenge.currencyexchange.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,6 +12,10 @@ import javax.persistence.*;
 @NamedQueries({
         @NamedQuery(name = "User.findByLogin", query = "select u from User u where u.login = :login")
 })
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id

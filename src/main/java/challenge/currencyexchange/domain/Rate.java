@@ -1,5 +1,7 @@
 package challenge.currencyexchange.domain;
 
+import lombok.*;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -12,6 +14,11 @@ import java.util.Map;
 @NamedQueries({
         @NamedQuery(name = "Rate.findByUser", query = "select r from Rate r where r.user = :user")
 })
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Rate {
 
     @Id
@@ -28,20 +35,18 @@ public class Rate {
     @NotNull(message = "The currency base value is required")
     private Double baseValue;
 
-    @Column(name = "conversion_rate")
+    @Column(name = "conversion_tax")
     @NotNull(message = "The conversion rate is required")
-    private Double conversionRate;
+    private Double conversionTax;
 
-    @Column
+    @Column(name = "date_time")
     @NotNull(message = "Date time reate is required")
     private LocalDateTime dateTime;
 
-    @ElementCollection
-    @CollectionTable(name = "rate_detail_cextb02",
-            joinColumns = {@JoinColumn(name = "rate_detail_id", referencedColumnName = "rate_id")})
-    @MapKeyColumn(name = "currency_name")
-    @Column(name = "currency_value")
-    private Map<String, Double> rateDetails = new LinkedHashMap<>();
+    @Column(name = "symbol_to_convert")
+    @NotNull(message = "The currency to convert is required")
+    @Size(min = 3, max = 3)
+    private String symbolToConvert;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "fk_user"))

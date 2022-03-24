@@ -12,6 +12,6 @@ import java.util.List;
 public class RateRepository implements PanacheRepository<Rate> {
 
     public List<Rate> findByUser(User user) {
-        return find("Rate.findByUser", Parameters.with("user", user)).list();
+        return find("#Rate.findByUser", Parameters.with("user", user)).list();
     }
 }
