@@ -34,13 +34,13 @@ public class RateRepositoryTest {
         Map<String, Double> rateDetails = new LinkedHashMap<>();
         rateDetails.put("USD", 50d);
         Rate r = Rate.builder()
-                .base("EUR")
-                .baseValue(5d)
-                .dateTime(LocalDateTime.now())
-                .conversionTax(2d)
-                .rateDetails(rateDetails)
                 .user(userRepository.findByLogin(config.rootUserLogin()).orElseThrow(() -> new WebApplicationException(
                         "Root User could not be found, check migrations configuration and sql files ")))
+                .base("EUR")
+                .baseValue(5d)
+                .symbolToConvert("USD")
+                .conversionTax(9d)
+                .dateTime(LocalDateTime.now())
                 .build();
         repository.persist(r);
         Assertions.assertTrue(! repository.findByUser(r.getUser()).isEmpty());

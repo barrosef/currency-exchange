@@ -44,9 +44,10 @@ public class ExchangeRateService {
     }
 
     public ExchangeRateResponse rate(ExchangeRateRequest exchangeRateRequest) {
-        return rateBuilder.validate(rootUser, exchangeRateRequest, config, userRepository)
-                .exchange(exchangeRateRequest, exchangeRatesClient, config)
-                .createRate(exchangeRateRequest, this)
+        return rateBuilder.validate(this.rootUser, exchangeRateRequest, this.config, this.userRepository)
+                .exchange(this.exchangeRatesClient)
+                .convert()
+                .createRate(this.rateRepository)
                 .build();
     }
 

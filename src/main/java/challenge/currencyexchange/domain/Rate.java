@@ -43,13 +43,10 @@ public class Rate {
     @NotNull(message = "Date time reate is required")
     private LocalDateTime dateTime;
 
-    @ElementCollection
-    @CollectionTable(name = "rate_detail_cextb02",
-            joinColumns = {@JoinColumn(name = "rate_detail_id", referencedColumnName = "rate_id")})
-    @MapKeyColumn(name = "currency_name")
-    @Column(name = "currency_value")
-    @Builder.Default
-    private Map<String, Double> rateDetails = new LinkedHashMap<>();
+    @Column(name = "target")
+    @NotNull(message = "The currency to convert is required")
+    @Size(min = 3, max = 3)
+    private String symbolToConvert;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "fk_user"))
