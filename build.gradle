@@ -21,6 +21,8 @@ dependencies {
     implementation 'io.quarkus:quarkus-agroal'
     implementation 'io.quarkus:quarkus-hibernate-validator'
     implementation 'org.projectlombok:lombok:1.18.22'
+    implementation 'io.quarkus:quarkus-junit5-mockito'
+    implementation 'io.quarkus:quarkus-panache-mock'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
