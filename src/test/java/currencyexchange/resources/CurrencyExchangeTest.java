@@ -1,3 +1,5 @@
+package currencyexchange.resources;
+
 import io.quarkus.test.junit.QuarkusTest;
 
  @QuarkusTest
