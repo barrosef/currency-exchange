@@ -35,9 +35,9 @@ public class Rate {
     @NotNull(message = "The currency base value is required")
     private Double baseValue;
 
-    @Column(name = "conversion_rate")
+    @Column(name = "conversion_tax")
     @NotNull(message = "The conversion rate is required")
-    private Double conversionRate;
+    private Double conversionTax;
 
     @Column
     @NotNull(message = "Date time reate is required")
@@ -48,6 +48,7 @@ public class Rate {
             joinColumns = {@JoinColumn(name = "rate_detail_id", referencedColumnName = "rate_id")})
     @MapKeyColumn(name = "currency_name")
     @Column(name = "currency_value")
+    @Builder.Default
     private Map<String, Double> rateDetails = new LinkedHashMap<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
