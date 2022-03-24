@@ -28,20 +28,23 @@ public class CurrencyExchangeResource {
     @Inject
     ExchangeRateService service;
 
-    @HeaderParam("user_login")
-    @NotNull
-    String requestUserLogin;
-
     @POST
     @Operation(summary = "To convert currency",
             description = "Convert from EUR from any currency")
     @APIResponses(value = @APIResponse(responseCode = "201", description = "Currency conversion success",
             content = @Content(mediaType = "application/json")))
-    public Response postToConvert(@Valid ExchangeRateRequest exchangeRateRequest) {
-        return Response
-                .ok(service.rate(exchangeRateRequest))
-                .status(CREATED)
-                .build();
+    public Response postToConvert(@Valid ExchangeRateRequest exchangeRateRequest,
+                                  @NotNull @HeaderParam("user_login") String requestUserLogin) {
+        try {
+            exchangeRateRequest.setRequestUserLogin(requestUserLogin);
+            return Response
+                    .ok(service.rate(exchangeRateRequest))
+                    .status(CREATED)
+                    .build();
+
+        } catch (WebApplicationException e) {
+            return this.handleException(e);
+        }
     }
 
     @GET
@@ -49,10 +52,25 @@ public class CurrencyExchangeResource {
             description = "List conversions")
     @APIResponses(value = @APIResponse(responseCode = "200", description = "List user conversions success",
             content = @Content(mediaType = "application/json")))
-    public Response getExchangeList() {
-        return Response
-                .ok(service.list(this.requestUserLogin))
-                .status(ACCEPTED)
+    public Response getExchangeList(
+            @NotNull @HeaderParam("user_login") String requestUserLogin) {
+        try {
+            return Response
+                    .ok(service.list(requestUserLogin))
+                    .status(ACCEPTED)
+                    .build();
+
+        } catch(WebApplicationException e) {
+            return this.handleException(e);
+        }
+    }
+
+    private Response handleException(WebApplicationException e) {
+        return Response.ok(ErrorResponse.builder()
+                        .message(e.getMessage())
+                        .status(e.getResponse().getStatus())
+                        .build())
+                .status(e.getResponse().getStatus())
                 .build();
     }
 }

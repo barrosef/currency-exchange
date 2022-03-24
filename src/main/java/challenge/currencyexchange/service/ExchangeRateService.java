@@ -54,6 +54,13 @@ public class ExchangeRateService {
                 .build();
     }
 
+    public List<ExchangeRateListResponse> list(String userLogin) {
+        return  listBuilder
+                    .validate(rootUser, userLogin, this.userRepository)
+                    .listRates(rateRepository)
+                    .build();
+    }
+
     private void init() {
         this.loadRootUser();
     }
@@ -62,12 +69,5 @@ public class ExchangeRateService {
         this.rootUser = this.userRepository.findByLogin(config.rootUserLogin())
                 .orElseThrow(() ->
                         new RuntimeException("Could not instantiate application, no root user configuration found"));
-    }
-
-    public List<ExchangeRateListResponse> list(String userLogin) {
-        return  listBuilder
-                    .validate(rootUser, userLogin, this.userRepository)
-                    .listRates(rateRepository)
-                    .build();
     }
 }

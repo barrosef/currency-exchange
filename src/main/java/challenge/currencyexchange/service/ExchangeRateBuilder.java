@@ -12,6 +12,7 @@ import challenge.currencyexchange.util.ExchangeRateConfig;
 
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -32,13 +33,13 @@ public class ExchangeRateBuilder {
     public ExchangeRateBuilder validate(User rootUser, ExchangeRateRequest request, ExchangeRateConfig config,
                                         UserRepository userRepository) {
         if (rootUser.getLogin().equals(request.getRequestUserLogin())){
-            new WebApplicationException("Only non root users can convert coins", UNAUTHORIZED);
+            throw new WebApplicationException("Only non root users can convert coins", UNAUTHORIZED);
         }
         if (!config.permittedCoins().contains(request.getConvertFromSymbol())) {
-            new WebApplicationException("Only non root users can convert coins", UNAUTHORIZED);
+            throw new WebApplicationException("No authorized convert convertFromSymbol delivered", UNAUTHORIZED);
         }
         this.userRating = userRepository.findByLogin(request.getRequestUserLogin()).orElseThrow(() ->
-                new WebApplicationException("User can't convert or not found", UNAUTHORIZED));
+            new WebApplicationException("User can't convert or not found", UNAUTHORIZED));
         this.request = request;
         this.config = config;
         return this;

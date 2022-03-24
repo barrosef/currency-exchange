@@ -30,7 +30,8 @@ public class ListRatesBuilder {
 
     public ListRatesBuilder validate(User rootUser, String login, UserRepository userRepository) {
         this.isRootUser = rootUser.getLogin().equals(login);
-        this.user = userRepository.findByLogin(login).orElseThrow(() ->
+        if (!isRootUser)
+            this.user = userRepository.findByLogin(login).orElseThrow(() ->
                 new WebApplicationException("User can't convert or not found", UNAUTHORIZED));
         return this;
     }
@@ -45,7 +46,7 @@ public class ListRatesBuilder {
     }
 
     public List<ExchangeRateListResponse> build() {
-        this.rates
+        return this.rates
                 .stream()
                 .map(rate -> {
                     return ExchangeRateListResponse.builder()
@@ -58,6 +59,5 @@ public class ListRatesBuilder {
                             .build();
                 })
                 .collect(Collectors.toList());
-        return null;
     }
 }
