@@ -10,6 +10,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -24,11 +25,12 @@ import static javax.ws.rs.core.Response.Status.CREATED;
 @Produces(MediaType.APPLICATION_JSON)
 public class CurrencyExchangeResource {
 
-    @HeaderParam("user_login")
-    String user;
-
     @Inject
     ExchangeRateService service;
+
+    @HeaderParam("user_login")
+    @NotNull
+    String requestUserLogin;
 
     @POST
     @Operation(summary = "To convert currency",
@@ -49,7 +51,7 @@ public class CurrencyExchangeResource {
             content = @Content(mediaType = "application/json")))
     public Response getExchangeList() {
         return Response
-                .ok(service.list(this.user))
+                .ok(service.list(this.requestUserLogin))
                 .status(ACCEPTED)
                 .build();
     }
