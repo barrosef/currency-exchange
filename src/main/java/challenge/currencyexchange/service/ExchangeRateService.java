@@ -4,6 +4,7 @@ import challenge.currencyexchange.client.ExchangeRatesClient;
 import challenge.currencyexchange.domain.User;
 import challenge.currencyexchange.domain.repository.RateRepository;
 import challenge.currencyexchange.domain.repository.UserRepository;
+import challenge.currencyexchange.resources.ExchangeRateListResponse;
 import challenge.currencyexchange.resources.ExchangeRateRequest;
 import challenge.currencyexchange.resources.ExchangeRateResponse;
 import challenge.currencyexchange.util.ExchangeRateConfig;
@@ -12,6 +13,7 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Startup
@@ -43,6 +45,7 @@ public class ExchangeRateService {
         this.init();
     }
 
+    @Transactional(Transactional.TxType.REQUIRES_NEW)
     public ExchangeRateResponse rate(ExchangeRateRequest exchangeRateRequest) {
         return rateBuilder.validate(this.rootUser, exchangeRateRequest, this.config, this.userRepository)
                 .exchange(this.exchangeRatesClient)
@@ -61,10 +64,10 @@ public class ExchangeRateService {
                         new RuntimeException("Could not instantiate application, no root user configuration found"));
     }
 
-    public List<ExchangeRateResponse> list(String userLogin) {
+    public List<ExchangeRateListResponse> list(String userLogin) {
         return  listBuilder
-                    .validate(rootUser, userLogin)
-                    .listRates()
+                    .validate(rootUser, userLogin, this.userRepository)
+                    .listRates(rateRepository)
                     .build();
     }
 }
