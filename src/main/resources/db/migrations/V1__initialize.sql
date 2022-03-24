@@ -1,5 +1,5 @@
 create table user_cextb00 (
-    user_id int not null,
+    user_id bigint not null,
     login   varchar(25) not null,
     email   varchar(50) not null,
     constraint USER_CEXTB00_PK
