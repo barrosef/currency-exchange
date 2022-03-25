@@ -7,7 +7,7 @@
 5. [Arquitetura](#arquitetura)
 6. [Pendências](#pendencias)
 
-##Propósito
+## Propósito
 1. Participar do desafio de construção de uma api para conversão entre moedas;
 2. Me divertir com as tecnologias e seu ecosistema;
 3. Gerar um legado de conhecimento para utilizarno curto e médio prao;
